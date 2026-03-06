@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELEV8 | Meet the Musicians</title>
+    <style>
+        body { background: #0a0a0a; color: white; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 40px 20px; }
+        .container { max-width: 900px; margin: auto; }
+        .back-btn { color: #FF8C00; text-decoration: none; font-weight: bold; display: inline-block; margin-bottom: 40px; }
+        .member-block { margin-bottom: 100px; animation: fadeIn 0.8s ease; }
+        .member-header { display: grid; grid-template-columns: 300px 1fr; gap: 40px; align-items: center; }
+        .member-header img { width: 100%; border-radius: 15px; border: 2px solid #FF8C00; }
+        h1 { color: #FFD700; font-size: 2.5rem; margin: 0; }
+        h2 { color: #FF8C00; text-transform: uppercase; font-size: 1rem; margin-top: 10px; }
+        .bio-text { line-height: 1.8; color: #ccc; margin-top: 20px; }
+        
+        /* Extra Pictures Gallery */
+        .extra-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 30px; }
+        .extra-gallery img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; opacity: 0.7; transition: 0.3s; }
+        .extra-gallery img:hover { opacity: 1; transform: scale(1.03); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 700px) { .member-header { grid-template-columns: 1fr; text-align: center; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">← Back to Homepage</a>
+        <div id="team-list"></div>
+    </div>
+
+    <script>
+        const members = [
+            { id: 'david', name: 'David Shonibare', role: 'Aux Keys & Guitar', bio: 'David is a co-founder and the melodic heart of ELEV8. His unique style blends soulful melodies with the high-energy rhythms of Afrobeats.', img: 'gallery/David-1.jpg', extra: [] },
+            { id: 'joshua', name: 'Joshua Olufemi', role: 'Keys', bio: 'As the primary keyboardist, Joshua provides the harmonic foundation. His versatility allows the band to transition smoothly between African classics and modern hits.', img: 'gallery/BM-1.jpg', extra: ['gallery/BM-2.jpg'] },
+            { id: 'ukeme', name: 'Ukeme Enoch', role: 'Drums', bio: 'Ukeme is the rhythmic engine. His precision and explosive energy are the secret to keeping the dance floor packed throughout the night.', img: 'gallery/UK-1.jpg', extra: ['gallery/UK-2.jpg', 'gallery/UK-3.jpg'] },
+            { id: 'john', name: 'John Olaleke', role: 'Bass', bio: 'John provides the deep, soulful groove that defines the ELEV8 sound. His basslines are the heartbeat of every live performance.', img: 'gallery/John-1.jpg', extra: ['gallery/John-2.jpg'] }
+        ];
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const selectedId = urlParams.get('member');
+
+        // Reorder list so the clicked member is at the top
+        const sorted = [...members].sort((a, b) => (a.id === selectedId ? -1 : b.id === selectedId ? 1 : 0));
+
+        const listDiv = document.getElementById('team-list');
+        sorted.forEach(m => {
+            let extraHTML = m.extra.length > 0 ? `<div class="extra-gallery">${m.extra.map(pic => `<img src="${pic}">`).join('')}</div>` : '';
+            
+            listDiv.innerHTML += `
+                <div class="member-block">
+                    <div class="member-header">
+                        <img src="${m.img}" alt="${m.name}">
+                        <div>
+                            <h1>${m.name}</h1>
+                            <h2>${m.role}</h2>
+                            <p class="bio-text">${m.bio}</p>
+                        </div>
+                    </div>
+                    ${extraHTML}
+                </div>
+            `;
+        });
+    </script>
+</body>
+</html>
