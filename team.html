@@ -8,19 +8,19 @@
         body { background: #0a0a0a; color: white; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 40px 20px; }
         .container { max-width: 900px; margin: auto; }
         .back-btn { color: #FF8C00; text-decoration: none; font-weight: bold; display: inline-block; margin-bottom: 40px; }
-        .member-block { margin-bottom: 100px; animation: fadeIn 0.8s ease; }
-        .member-header { display: grid; grid-template-columns: 300px 1fr; gap: 40px; align-items: center; }
+        .member-block { margin-bottom: 100px; }
+        .member-header { display: grid; grid-template-columns: 300px 1fr; gap: 40px; align-items: start; }
         .member-header img { width: 100%; border-radius: 15px; border: 2px solid #FF8C00; }
+        
+        /* SUB-CAROUSEL STYLING */
+        .sub-carousel { position: relative; width: 100%; height: 400px; margin-top: 30px; border-radius: 15px; overflow: hidden; }
+        .sub-carousel img { position: absolute; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1s; }
+        .sub-carousel img.active { opacity: 1; }
+
         h1 { color: #FFD700; font-size: 2.5rem; margin: 0; }
         h2 { color: #FF8C00; text-transform: uppercase; font-size: 1rem; margin-top: 10px; }
-        .bio-text { line-height: 1.8; color: #ccc; margin-top: 20px; }
+        .bio-text { line-height: 1.8; color: #ccc; margin-top: 20px; font-size: 1.1rem; }
         
-        /* Extra Pictures Gallery */
-        .extra-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 30px; }
-        .extra-gallery img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; opacity: 0.7; transition: 0.3s; }
-        .extra-gallery img:hover { opacity: 1; transform: scale(1.03); }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @media (max-width: 700px) { .member-header { grid-template-columns: 1fr; text-align: center; } }
     </style>
 </head>
@@ -34,20 +34,24 @@
         const members = [
             { id: 'david', name: 'David Shonibare', role: 'Aux Keys & Guitar', bio: 'David is a co-founder and the melodic heart of ELEV8. His unique style blends soulful melodies with the high-energy rhythms of Afrobeats.', img: 'gallery/David-1.jpg', extra: [] },
             { id: 'joshua', name: 'Joshua Olufemi', role: 'Keys', bio: 'As the primary keyboardist, Joshua provides the harmonic foundation. His versatility allows the band to transition smoothly between African classics and modern hits.', img: 'gallery/BM-1.jpg', extra: ['gallery/BM-2.jpg'] },
-            { id: 'ukeme', name: 'Ukeme Enoch', role: 'Drums', bio: 'Ukeme is the rhythmic engine. His precision and explosive energy are the secret to keeping the dance floor packed throughout the night.', img: 'gallery/UK-1.jpg', extra: ['gallery/UK-2.jpg', 'gallery/UK-3.jpg'] },
-            { id: 'john', name: 'John Olaleke', role: 'Bass', bio: 'John provides the deep, soulful groove that defines the ELEV8 sound. His basslines are the heartbeat of every live performance.', img: 'gallery/John-1.jpg', extra: ['gallery/John-2.jpg'] }
+            { id: 'ukeme', name: 'Ukeme Enoch', role: 'Drums', bio: 'Ukeme Enoch has shown passion for the drums nurtured by gospel roots since an early age. Well-versed in Gospel, Afro, Reggae, Pop, and Funk, he has been mentoring since 2019. Ukeme is endorsed with Soul-tone Cymbals and his band Lyssa and The Try-tones was nominated for best R&B Artist for the year 2023.', img: 'gallery/UK-1.jpg', extra: ['gallery/UK-2.jpg', 'gallery/UK-3.jpg'] },
+            { id: 'john', name: 'John Olaleke', role: 'Bass', bio: 'Guided by his faith in Christ, John Olaleke balances a career as an electrical engineering technologist with a profound calling to music. With 10 years on the bass guitar, his technical skill meets spiritual devotion, playing for Elev8 Music & His Expression to honor the gift he has been blessed with.', img: 'gallery/John-1.jpg', extra: ['gallery/John-2.jpg'] }
         ];
 
         const urlParams = new URLSearchParams(window.location.search);
         const selectedId = urlParams.get('member');
-
-        // Reorder list so the clicked member is at the top
         const sorted = [...members].sort((a, b) => (a.id === selectedId ? -1 : b.id === selectedId ? 1 : 0));
 
         const listDiv = document.getElementById('team-list');
-        sorted.forEach(m => {
-            let extraHTML = m.extra.length > 0 ? `<div class="extra-gallery">${m.extra.map(pic => `<img src="${pic}">`).join('')}</div>` : '';
-            
+        sorted.forEach((m, index) => {
+            let carouselHTML = '';
+            if (m.extra.length > 0) {
+                const allPics = [m.img, ...m.extra];
+                carouselHTML = `<div class="sub-carousel" id="carousel-${m.id}">
+                    ${allPics.map((pic, i) => `<img src="${pic}" class="${i === 0 ? 'active' : ''}">`).join('')}
+                </div>`;
+            }
+
             listDiv.innerHTML += `
                 <div class="member-block">
                     <div class="member-header">
@@ -58,9 +62,22 @@
                             <p class="bio-text">${m.bio}</p>
                         </div>
                     </div>
-                    ${extraHTML}
+                    ${carouselHTML}
                 </div>
             `;
+        });
+
+        // Initialize sub-carousels
+        members.forEach(m => {
+            if (m.extra.length > 0) {
+                const imgs = document.querySelectorAll(`#carousel-${m.id} img`);
+                let cur = 0;
+                setInterval(() => {
+                    imgs[cur].classList.remove('active');
+                    cur = (cur + 1) % imgs.length;
+                    imgs[cur].classList.add('active');
+                }, 4000); // Cycle individual member photos every 4s
+            }
         });
     </script>
 </body>

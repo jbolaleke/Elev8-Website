@@ -21,7 +21,7 @@
             scroll-behavior: smooth;
         }
 
-        /* HERO CAROUSEL */
+        /* HERO CAROUSEL - CENTERED FIX */
         header {
             height: 85vh;
             position: relative;
@@ -38,14 +38,18 @@
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .carousel-bg img {
             position: absolute;
             width: 100%; height: 100%;
             object-fit: cover;
+            object-position: center; /* Ensures image is centered */
             opacity: 0;
-            transition: opacity 1.5s ease-in-out;
+            transition: opacity 2s ease-in-out;
         }
 
         .carousel-bg img.active { opacity: 0.5; }
@@ -81,11 +85,7 @@
             border: 1px solid rgba(255,215,0,0.1);
         }
 
-        .team-card img {
-            width: 100%; height: 100%; object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
+        .team-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
         .team-info {
             position: absolute;
             bottom: 0; left: 0; width: 100%; height: 100%;
@@ -103,7 +103,7 @@
             overflow: hidden;
             transition: max-height 0.5s ease, opacity 0.5s ease;
             opacity: 0;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: #eee;
         }
 
@@ -130,7 +130,7 @@
 <body>
 
     <header>
-        <div class="carousel-bg" id="carousel">
+        <div class="carousel-bg" id="hero-carousel">
             <img src="gallery/band-live-1.jpg" class="active">
             <img src="gallery/band-live-2.jpg">
             <img src="gallery/band-live-3.jpg">
@@ -157,4 +157,56 @@
                 <div class="team-info">
                     <h3>David Shonibare</h3>
                     <p class="role">Aux Keys & Guitar</p>
-                    <div class="team-bio">Co-founder and melodic heart of ELEV8, David blends soul with high-energy Afrobeats guitar riffs.</div>
+                    <div class="team-bio">Co-founder and melodic heart of ELEV8...</div>
+                </div>
+            </div>
+            <div class="team-card" onclick="location.href='team.html?member=joshua'">
+                <img src="gallery/BM-1.jpg" alt="Joshua Olufemi">
+                <div class="team-info">
+                    <h3>Joshua Olufemi</h3>
+                    <p class="role">Keys</p>
+                    <div class="team-bio">Master of the keys, Joshua provides the harmonic foundation...</div>
+                </div>
+            </div>
+            <div class="team-card" onclick="location.href='team.html?member=ukeme'">
+                <img src="gallery/UK-1.jpg" alt="Ukeme Enoch">
+                <div class="team-info">
+                    <h3>Ukeme Enoch</h3>
+                    <p class="role">Drums</p>
+                    <div class="team-bio">Guided by gospel roots, Ukeme is a versatile drummer endorsed by Soul-tone Cymbals...</div>
+                </div>
+            </div>
+            <div class="team-card" onclick="location.href='team.html?member=john'">
+                <img src="gallery/John-1.jpg" alt="John Olaleke">
+                <div class="team-info">
+                    <h3>John Olaleke</h3>
+                    <p class="role">Bass</p>
+                    <div class="team-bio">Electrical engineering technologist by day, John uses his 10 years of bass experience to honor his faith...</div>
+                </div>
+            </div>
+        </div>
+
+        <h2 id="booking-section" style="text-align: center; color: var(--gold); margin-top: 100px; letter-spacing: 2px;">BOOKING REQUESTS</h2>
+        <div style="background: var(--glass); padding: 40px; border-radius: 20px; border: 1px solid var(--deep-orange); max-width: 850px; margin: auto;">
+            <form action="https://formspree.io/f/xdawolke" method="POST">
+                <div class="form-row">
+                    <div><label>Your Email</label><input type="email" name="Client_Email" required></div>
+                    <div><label>Phone Number</label><input type="tel" name="Client_Phone" required></div>
+                </div>
+                <button type="submit" style="width: 100%; background: var(--deep-orange); color: white; border: none; padding: 18px; font-weight: bold; border-radius: 8px; cursor: pointer; font-size: 1.1rem; margin-top: 10px;">SUBMIT INQUIRY</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const heroImages = document.querySelectorAll('#hero-carousel img');
+        let currentHero = 0;
+        function nextHero() {
+            heroImages[currentHero].classList.remove('active');
+            currentHero = (currentHero + 1) % heroImages.length;
+            heroImages[currentHero].classList.add('active');
+        }
+        setInterval(nextHero, 10000); // FIX: 10 second cycle
+    </script>
+</body>
+</html>
