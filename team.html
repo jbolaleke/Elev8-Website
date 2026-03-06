@@ -12,9 +12,8 @@
         .member-header { display: grid; grid-template-columns: 300px 1fr; gap: 40px; align-items: start; }
         .member-header img { width: 100%; border-radius: 15px; border: 2px solid #FF8C00; }
         
-        /* SUB-CAROUSEL STYLING */
-        .sub-carousel { position: relative; width: 100%; height: 400px; margin-top: 30px; border-radius: 15px; overflow: hidden; }
-        .sub-carousel img { position: absolute; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1s; }
+        .sub-carousel { position: relative; width: 100%; height: 450px; margin-top: 30px; border-radius: 15px; overflow: hidden; background: #000; }
+        .sub-carousel img { position: absolute; width: 100%; height: 100%; object-fit: contain; opacity: 0; transition: opacity 1.5s; }
         .sub-carousel img.active { opacity: 1; }
 
         h1 { color: #FFD700; font-size: 2.5rem; margin: 0; }
@@ -32,8 +31,8 @@
 
     <script>
         const members = [
-            { id: 'david', name: 'David Shonibare', role: 'Aux Keys & Guitar', bio: 'David is a co-founder and the melodic heart of ELEV8. His unique style blends soulful melodies with the high-energy rhythms of Afrobeats.', img: 'gallery/David-1.jpg', extra: [] },
-            { id: 'joshua', name: 'Joshua Olufemi', role: 'Keys', bio: 'As the primary keyboardist, Joshua provides the harmonic foundation. His versatility allows the band to transition smoothly between African classics and modern hits.', img: 'gallery/BM-1.jpg', extra: ['gallery/BM-2.jpg'] },
+            { id: 'david', name: 'David Shonibare', role: 'Aux Keys', bio: 'David is a co-founder and the melodic heart of ELEV8. His unique style blends soulful melodies with high-energy rhythms.', img: 'gallery/David-1.jpg', extra: [] },
+            { id: 'joshua', name: 'Joshua Olufemi', role: 'Main Keys', bio: 'As the primary keyboardist, Joshua provides the harmonic foundation that elevates every performance.', img: 'gallery/BM-1.jpg', extra: ['gallery/BM-2.jpg'] },
             { id: 'ukeme', name: 'Ukeme Enoch', role: 'Drums', bio: 'Ukeme Enoch has shown passion for the drums nurtured by gospel roots since an early age. Well-versed in Gospel, Afro, Reggae, Pop, and Funk, he has been mentoring since 2019. Ukeme is endorsed with Soul-tone Cymbals and his band Lyssa and The Try-tones was nominated for best R&B Artist for the year 2023.', img: 'gallery/UK-1.jpg', extra: ['gallery/UK-2.jpg', 'gallery/UK-3.jpg'] },
             { id: 'john', name: 'John Olaleke', role: 'Bass', bio: 'Guided by his faith in Christ, John Olaleke balances a career as an electrical engineering technologist with a profound calling to music. With 10 years on the bass guitar, his technical skill meets spiritual devotion, playing for Elev8 Music & His Expression to honor the gift he has been blessed with.', img: 'gallery/John-1.jpg', extra: ['gallery/John-2.jpg'] }
         ];
@@ -43,7 +42,7 @@
         const sorted = [...members].sort((a, b) => (a.id === selectedId ? -1 : b.id === selectedId ? 1 : 0));
 
         const listDiv = document.getElementById('team-list');
-        sorted.forEach((m, index) => {
+        sorted.forEach((m) => {
             let carouselHTML = '';
             if (m.extra.length > 0) {
                 const allPics = [m.img, ...m.extra];
@@ -67,17 +66,20 @@
             `;
         });
 
-        // Initialize sub-carousels
-        members.forEach(m => {
-            if (m.extra.length > 0) {
-                const imgs = document.querySelectorAll(`#carousel-${m.id} img`);
-                let cur = 0;
-                setInterval(() => {
-                    imgs[cur].classList.remove('active');
-                    cur = (cur + 1) % imgs.length;
-                    imgs[cur].classList.add('active');
-                }, 4000); // Cycle individual member photos every 4s
-            }
+        // Initialize carousels after page load
+        window.addEventListener('DOMContentLoaded', () => {
+            members.forEach(m => {
+                const container = document.getElementById(`carousel-${m.id}`);
+                if (container) {
+                    const imgs = container.querySelectorAll('img');
+                    let cur = 0;
+                    setInterval(() => {
+                        imgs[cur].classList.remove('active');
+                        cur = (cur + 1) % imgs.length;
+                        imgs[cur].classList.add('active');
+                    }, 4000);
+                }
+            });
         });
     </script>
 </body>
