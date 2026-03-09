@@ -112,6 +112,23 @@
         .team-card h3 { color: var(--gold); margin: 0; font-size: 1.8rem; letter-spacing: 1px; }
         .team-card .role { color: var(--deep-orange); font-weight: bold; font-size: 0.9rem; text-transform: uppercase; margin: 5px 0; }
 
+        /* VIDEO SECTION */
+        .video-container {
+            margin: 80px 0;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,215,0,0.2);
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            border: none;
+        }
+
         /* BOOKING FORM */
         .booking-wrap {
             background: var(--glass); 
@@ -134,7 +151,6 @@
         textarea { height: 100px; resize: vertical; }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
 
-        /* IMPROVED SUCCESS MESSAGE */
         #success-msg {
             display: none;
             width: 100%;
@@ -216,7 +232,12 @@
             </div>
         </div>
 
-        <div id="booking-section" style="padding-top: 120px;">
+        <h2 style="text-align: center; color: var(--gold); letter-spacing: 4px; margin: 100px 0 40px 0; font-size: 2.5rem;">WATCH US LIVE</h2>
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/SshsX6YfLNo" title="ELEV8 Music Live" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+
+        <div id="booking-section" style="padding-top: 50px;">
             <h2 style="text-align: center; color: var(--gold); letter-spacing: 3px; font-size: 2.5rem; margin-bottom: 40px;">SECURE THE DATE</h2>
             <div class="booking-wrap">
                 
