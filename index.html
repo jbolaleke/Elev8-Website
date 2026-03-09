@@ -200,8 +200,8 @@
                     <div class="form-row">
                         <div><label>Contact Email</label><input type="email" name="Email" required></div>
                         <div>
-                            <label>Phone Number (Digits only)</label>
-                            <input type="tel" name="Phone" onkeypress="return isNumberKey(event)" inputmode="numeric" required>
+                            <label>Phone Number</label>
+                            <input type="tel" name="Phone" onkeypress="return isPhoneKey(event)" maxlength="15" inputmode="tel" required>
                         </div>
                     </div>
                     <div class="form-row">
@@ -217,7 +217,7 @@
                     <div class="form-row">
                         <div>
                             <label>Budget (CAD - Digits only)</label>
-                            <input type="text" name="Budget" onkeypress="return isNumberKey(event)" inputmode="numeric" required>
+                            <input type="text" name="Budget" onkeypress="return isBudgetKey(event)" maxlength="15" inputmode="numeric" required>
                         </div>
                         <div>
                             <label>Singers?</label>
@@ -240,8 +240,18 @@
     <footer>&copy; 2026 ELEV8 MUSIC | REGINA, SK | ALL RIGHTS RESERVED</footer>
 
     <script>
-        // Restricts input to numeric digits only
-        function isNumberKey(evt) {
+        // Validation for Phone: Allows Digits, +, and - up to 15 chars
+        function isPhoneKey(evt) {
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            // Allow numbers (48-57), plus (43), and hyphen (45)
+            if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode !== 43 && charCode !== 45) {
+                return false;
+            }
+            return true;
+        }
+
+        // Validation for Budget: Digits only up to 15 chars
+        function isBudgetKey(evt) {
             var charCode = (evt.which) ? evt.which : evt.keyCode;
             if (charCode > 31 && (charCode < 48 || charCode > 57)) {
                 return false;
