@@ -99,7 +99,7 @@
             transform: translateY(-2px);
         }
 
-        /* Team Section */
+        /* Shared Section Styles */
         .container { max-width: 1200px; margin: 0 auto; padding: 100px 20px; }
 
         h2.section-title {
@@ -111,6 +111,7 @@
             text-transform: uppercase;
         }
 
+        /* Team Cards */
         .team-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -153,25 +154,42 @@
         .team-card h3 { color: #fff; margin: 0; font-size: 1.5rem; transition: 0.3s; }
         .team-card .role { color: var(--primary-gold); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; }
 
-        /* Media Section */
-        .video-box {
-            border: 2px solid var(--primary-gold);
-            border-radius: 10px;
-            margin-top: 50px;
-            background: #000;
+        /* Merch Section (Coming Soon) */
+        .merch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .merch-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid #222;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            position: relative;
             overflow: hidden;
         }
 
-        .responsive-video {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
+        .merch-card::before {
+            content: "COMING SOON";
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: var(--primary-gold);
+            color: black;
+            font-size: 0.7rem;
+            font-weight: bold;
+            padding: 5px 40px;
+            transform: rotate(45deg);
         }
 
-        .responsive-video iframe {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            border: none;
+        .merch-icon {
+            font-size: 3rem;
+            color: var(--muted-gold);
+            margin-bottom: 15px;
+            opacity: 0.5;
         }
 
         /* Booking Form */
@@ -193,9 +211,8 @@
             width: 100%; padding: 15px; background: #000; border: 1px solid #333; color: #fff; border-radius: 8px; font-size: 1rem;
         }
 
-        input:focus { border-color: var(--primary-gold); outline: none; }
+        input:focus, select:focus { border-color: var(--primary-gold); outline: none; }
 
-        /* Dark Mode Calendar/Time Icons Visibility */
         input::-webkit-calendar-picker-indicator {
             filter: invert(1);
             cursor: pointer;
@@ -222,8 +239,6 @@
             transform: translateY(-2px);
         }
 
-        #form-message { display: none; text-align: center; padding: 40px; border: 1px solid var(--primary-gold); border-radius: 20px; }
-
         footer { text-align: center; padding: 60px; color: #444; font-size: 0.8rem; letter-spacing: 3px; }
     </style>
 </head>
@@ -239,7 +254,6 @@
             <img src="gallery/band-live-6.jpg">
             <img src="gallery/band-live-7.jpg">
         </div>
-
         <div class="hero-content">
             <h1>ELEV8</h1>
             <p>Premier Afrobeats Experience</p>
@@ -288,22 +302,28 @@
             </div>
         </div>
 
-        <h2 class="section-title" style="margin-top: 120px;">Watch Live</h2>
-        <div class="video-box">
-            <div class="responsive-video">
-                <iframe src="https://www.youtube.com/embed/3NwuYSd4lBs" allowfullscreen></iframe>
+        <h2 class="section-title" style="margin-top: 120px;">ELEV8 MERCH</h2>
+        <div class="merch-grid">
+            <div class="merch-card">
+                <div class="merch-icon">👕</div>
+                <h3>ELEV8 Tees</h3>
+                <p style="color: #666;">Limited Edition Apparel</p>
+            </div>
+            <div class="merch-card">
+                <div class="merch-icon">🧢</div>
+                <h3>Signature Caps</h3>
+                <p style="color: #666;">Black & Gold Headwear</p>
+            </div>
+            <div class="merch-card">
+                <div class="merch-icon">📀</div>
+                <h3>Digital Packs</h3>
+                <p style="color: #666;">Exclusive Live Recordings</p>
             </div>
         </div>
 
         <div id="booking" class="booking-container">
             <h2 class="section-title" style="font-size: 2rem; margin-bottom: 40px;">Request a Booking</h2>
             
-            <div id="form-message">
-                <h3 style="color: var(--primary-gold);">Request Sent Successfully</h3>
-                <p>We will review your event details and contact you shortly.</p>
-                <button onclick="window.location.reload()" class="btn" style="margin-top: 20px;">New Request</button>
-            </div>
-
             <form id="elev8-booking-form" action="https://formspree.io/f/xdawolke" method="POST">
                 <div class="form-grid">
                     <div class="form-group">
@@ -315,12 +335,14 @@
                         <input type="tel" name="phone" maxlength="20" required>
                     </div>
                     <div class="form-group">
-                        <label>Event Date</label>
-                        <input type="date" name="event_date" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Duration</label>
-                        <input type="text" name="duration" placeholder="e.g. 2 Hours" required>
+                        <label>Event Type</label>
+                        <select name="event_type">
+                            <option value="Wedding">Wedding</option>
+                            <option value="Corporate">Corporate Event</option>
+                            <option value="Private Party">Private Party</option>
+                            <option value="Festival">Festival / Concert</option>
+                            <option value="Other">Other</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label>Include Singers?</label>
@@ -328,6 +350,18 @@
                             <option value="No">Instrumental Only</option>
                             <option value="Yes">Yes</option>
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Event Date</label>
+                        <input type="date" name="event_date" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Start Time</label>
+                        <input type="time" name="event_time" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Performance Duration</label>
+                        <input type="text" name="duration" placeholder="e.g. 2 x 45 min sets" required>
                     </div>
                     <div class="form-group">
                         <label>Budget (CAD)</label>
@@ -359,7 +393,6 @@
         }, 6000);
 
         const form = document.getElementById('elev8-booking-form');
-        const msg = document.getElementById('form-message');
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const response = await fetch(form.action, {
@@ -368,8 +401,8 @@
                 headers: { 'Accept': 'application/json' }
             });
             if (response.ok) {
-                form.style.display = 'none';
-                msg.style.display = 'block';
+                alert("Request Sent Successfully!");
+                form.reset();
             }
         });
     </script>
