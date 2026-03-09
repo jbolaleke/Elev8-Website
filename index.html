@@ -5,176 +5,226 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ELEV8 Music | Premier Afrobeats Cover Band</title>
     <style>
+        /* Base Styles & Theme */
         :root {
-            --gold: #FFD700;
-            --deep-blue: #003366;
-            --accent-blue: #0056b3;
-            --dark-bg: #0a0a0a;
-            --glass: rgba(255, 255, 255, 0.05);
+            --primary-gold: #FFD700;
+            --elev8-blue: #003366;
+            --bg-black: #050505;
+            --text-white: #ffffff;
         }
 
         body {
-            font-family: 'Segoe UI', Roboto, sans-serif;
-            background-color: var(--dark-bg);
-            color: white;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: var(--bg-black);
+            color: var(--text-white);
             margin: 0;
+            padding: 0;
             line-height: 1.6;
-            scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
-        /* HERO SECTION */
+        /* Hero Section & Logo */
         header {
-            height: 90vh;
-            position: relative;
-            overflow: hidden;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            text-align: center;
-            border-bottom: 4px solid var(--gold);
-            background: black;
-        }
-
-        .logo-img {
-            max-width: 350px;
-            height: auto;
-            margin-bottom: 20px;
-            z-index: 10;
             position: relative;
+            background: #000;
+            text-align: center;
+            border-bottom: 5px solid var(--primary-gold);
         }
 
-        .carousel-bg {
+        .hero-carousel {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 0;
+            z-index: 1;
         }
 
-        .carousel-bg img {
+        .hero-carousel img {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             object-fit: cover;
             opacity: 0;
-            transition: opacity 2s ease-in-out;
+            transition: opacity 1.5s ease-in-out;
         }
 
-        .carousel-bg img.active { opacity: 0.6; }
+        .hero-carousel img.active { opacity: 0.5; }
 
-        .hero-content { position: relative; z-index: 10; }
-        .tagline { font-size: 1.3rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 40px; color: #fff; text-shadow: 2px 2px 4px #000; }
+        .logo-container {
+            position: relative;
+            z-index: 10;
+            margin-bottom: 30px;
+        }
 
+        .logo-container img {
+            max-width: 380px;
+            height: auto;
+            filter: drop-shadow(0 0 10px rgba(0,0,0,0.8));
+        }
+
+        .hero-text {
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero-text p {
+            font-size: 1.4rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        /* Buttons */
+        .btn-group { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+        
         .btn {
-            padding: 15px 35px; text-decoration: none; color: white; border-radius: 50px;
-            font-weight: bold; margin: 10px; transition: 0.4s; display: inline-block;
-            text-transform: uppercase; letter-spacing: 1px; border: none;
+            padding: 18px 40px;
+            text-decoration: none;
+            color: #fff;
+            border-radius: 4px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
         }
-        .btn-insta { background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); }
-        .btn-yt { background-color: #FF0000; }
-        .btn-book { background-color: var(--deep-blue); cursor: pointer; border: 1px solid var(--gold); }
-        .btn:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0, 51, 102, 0.4); }
 
-        .container { max-width: 1200px; margin: auto; padding: 80px 20px; }
+        .btn-insta { background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d); }
+        .btn-youtube { background-color: #ff0000; }
+        .btn-booking { background-color: var(--elev8-blue); border-color: var(--primary-gold); }
 
-        /* TEAM SECTION */
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+            filter: brightness(1.1);
+        }
+
+        /* Content Sections */
+        .container { max-width: 1200px; margin: 0 auto; padding: 100px 20px; }
+
+        h2.section-title {
+            text-align: center;
+            font-size: 3rem;
+            color: var(--primary-gold);
+            letter-spacing: 8px;
+            margin-bottom: 60px;
+            text-transform: uppercase;
+        }
+
+        /* Team Grid Structure */
         .team-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 40px;
+        }
+
+        .member-card {
+            background: #111;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid #222;
+            transition: 0.4s;
+            position: relative;
+        }
+
+        .member-card:hover { border-color: var(--primary-gold); transform: scale(1.02); }
+
+        .member-img-wrap { height: 400px; overflow: hidden; }
+        .member-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+
+        .member-info { padding: 25px; text-align: center; }
+        .member-info h3 { color: var(--primary-gold); margin: 0; font-size: 1.6rem; }
+        .member-info .role { color: #aaa; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; margin: 10px 0; }
+        .member-info p { font-size: 0.9rem; color: #ccc; }
+
+        /* Video Section */
+        .video-box {
+            background: #111;
+            padding: 20px;
+            border: 1px solid var(--elev8-blue);
+            border-radius: 10px;
             margin-top: 50px;
         }
 
-        .team-card {
-            position: relative;
-            height: 500px;
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 215, 0, 0.1);
-            background: #111;
-        }
-
-        .team-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s ease; }
-        
-        .team-overlay {
-            position: absolute;
-            bottom: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(transparent 40%, rgba(0,0,0,0.95));
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 30px;
-            box-sizing: border-box;
-            transition: 0.4s;
-        }
-
-        .team-bio {
-            max-height: 0; opacity: 0; overflow-y: auto;
-            transition: all 0.5s ease; font-size: 0.95rem; color: #ddd;
-            margin-top: 0;
-        }
-
-        .team-card:hover img { transform: scale(1.1); filter: brightness(0.4); }
-        .team-card:hover .team-overlay { background: rgba(0, 51, 102, 0.85); justify-content: center; text-align: center; }
-        .team-card:hover .team-bio { max-height: 300px; opacity: 1; margin-top: 15px; }
-
-        .team-card h3 { color: var(--gold); margin: 0; font-size: 1.8rem; }
-        .team-card .role { color: #fff; font-weight: bold; font-size: 0.9rem; text-transform: uppercase; margin: 5px 0; }
-
-        /* VIDEO SECTION */
-        .video-container {
-            margin: 80px 0;
-            border-radius: 25px;
-            overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            border: 1px solid var(--gold);
+        .responsive-video {
             position: relative;
             padding-bottom: 56.25%;
             height: 0;
+            overflow: hidden;
         }
-        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
-        /* BOOKING FORM */
-        .booking-wrap {
-            background: var(--glass); 
-            padding: 50px; 
-            border-radius: 25px; 
-            border: 1px solid var(--gold); 
-            max-width: 900px; 
-            margin: auto;
-            min-height: 400px;
-            display: flex;
-            align-items: center;
+        .responsive-video iframe {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            border: none;
         }
-        form { width: 100%; }
-        label { display: block; margin-bottom: 8px; color: var(--gold); font-size: 0.9rem; font-weight: bold; }
+
+        /* Booking Form Styles */
+        .booking-container {
+            background: #111;
+            padding: 60px;
+            border-radius: 20px;
+            border: 2px solid var(--primary-gold);
+            margin-top: 80px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .form-group { margin-bottom: 25px; }
+        .form-group.full { grid-column: span 2; }
+
+        label { display: block; margin-bottom: 10px; color: var(--primary-gold); font-weight: bold; }
+
         input, select, textarea {
-            width: 100%; padding: 14px; background: #1a1a1a; border: 1px solid #333; color: white; border-radius: 10px; margin-bottom: 20px; box-sizing: border-box;
-            font-family: inherit;
-        }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-
-        #success-msg {
-            display: none;
             width: 100%;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            animation: fadeIn 0.5s ease;
-        }
-        #success-msg h3 { color: var(--gold); font-size: 2.5rem; margin-bottom: 10px; }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            padding: 15px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            color: #fff;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 1rem;
         }
 
-        footer { text-align: center; padding: 80px 20px; color: #555; font-size: 0.85rem; letter-spacing: 2px; }
+        input:focus { border-color: var(--elev8-blue); outline: none; }
+
+        .submit-btn {
+            width: 100%;
+            padding: 20px;
+            background: var(--elev8-blue);
+            color: white;
+            border: 2px solid var(--primary-gold);
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            border-radius: 8px;
+        }
+
+        .submit-btn:hover { background: #004488; letter-spacing: 2px; }
+
+        #form-message {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+
+        #form-message h3 { color: var(--primary-gold); font-size: 2rem; }
+
+        footer { text-align: center; padding: 60px; color: #444; border-top: 1px solid #111; }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="carousel-bg" id="hero-carousel">
+        <div class="hero-carousel" id="carousel">
             <img src="gallery/band-live-1.jpg" class="active">
             <img src="gallery/band-live-2.jpg">
             <img src="gallery/band-live-3.jpg">
@@ -183,134 +233,149 @@
             <img src="gallery/band-live-6.jpg">
             <img src="gallery/band-live-7.jpg">
         </div>
-        <div class="hero-content">
-            <img src="gallery/Logo.jpg" alt="ELEV8 Logo" class="logo-img">
-            <p class="tagline">Electrifying Afrobeats & Global Sounds</p>
-            <div>
-                <a href="https://www.instagram.com/elev8_msc?igsh=MWQ3aXAwb3cydG10OQ==" class="btn btn-insta" target="_blank">Instagram</a>
-                <a href="https://youtube.com/@elev8_msc?si=rKBV1Hr15Xliv-Wb" class="btn btn-yt" target="_blank">YouTube</a>
-                <a href="#booking-section" class="btn btn-book">Book Now</a>
+
+        <div class="logo-container">
+            <img src="gallery/Logo.jpg" alt="ELEV8 Music Official Logo">
+        </div>
+
+        <div class="hero-text">
+            <p>High Performance Afrobeats Experience</p>
+            <div class="btn-group">
+                <a href="https://www.instagram.com/elev8_msc" class="btn btn-insta" target="_blank">Instagram</a>
+                <a href="https://youtube.com/@elev8_msc" class="btn btn-youtube" target="_blank">YouTube</a>
+                <a href="#booking" class="btn btn-booking">Book the Band</a>
             </div>
         </div>
     </header>
 
     <div class="container">
-        <h2 style="text-align: center; color: var(--gold); letter-spacing: 4px; margin-bottom: 50px; font-size: 2.5rem;">MEET THE TEAM</h2>
+        <h2 class="section-title">The Band</h2>
         <div class="team-grid">
-            <div class="team-card">
-                <img src="gallery/David.jpg" alt="David Shonibare">
-                <div class="team-overlay">
+            <div class="member-card">
+                <div class="member-img-wrap"><img src="gallery/David.jpg" alt="David"></div>
+                <div class="member-info">
                     <h3>David Shonibare</h3>
-                    <p class="role">Aux Keys</p>
-                    <div class="team-bio">Co-founder and melodic heart of ELEV8. David's unique style blends soulful melodies with high-energy Afrobeats rhythms.</div>
+                    <div class="role">Auxiliary Keys & Guitar</div>
+                    <p>Co-founder of Elev8 Music.</p>
                 </div>
             </div>
-            <div class="team-card">
-                <img src="gallery/Joshua.jpg" alt="Joshua Olufemi">
-                <div class="team-overlay">
+            <div class="member-card">
+                <div class="member-img-wrap"><img src="gallery/Joshua.jpg" alt="Joshua"></div>
+                <div class="member-info">
                     <h3>Joshua Olufemi</h3>
-                    <p class="role">Main Keys</p>
-                    <div class="team-bio">Master of the keys, Joshua provides the harmonic foundation that elevates every performance.</div>
+                    <div class="role">Main Keys</div>
+                    <p>The harmonic engine of the band.</p>
                 </div>
             </div>
-            <div class="team-card">
-                <img src="gallery/Ukeme.jpg" alt="Ukeme Enoch">
-                <div class="team-overlay">
+            <div class="member-card">
+                <div class="member-img-wrap"><img src="gallery/Ukeme.jpg" alt="Ukeme"></div>
+                <div class="member-info">
                     <h3>Ukeme Enoch</h3>
-                    <p class="role">Drums</p>
-                    <div class="team-bio">Ukeme Enoch is a professional drummer and mentor active since 2019, endorsed by Soul-tone Cymbals.</div>
+                    <div class="role">Drums</div>
+                    <p>Endorsed by Soul-tone Cymbals.</p>
                 </div>
             </div>
-            <div class="team-card">
-                <img src="gallery/John.jpg" alt="John Olaleke">
-                <div class="team-overlay">
+            <div class="member-card">
+                <div class="member-img-wrap"><img src="gallery/John.jpg" alt="John"></div>
+                <div class="member-info">
                     <h3>John Olaleke</h3>
-                    <p class="role">Bass</p>
-                    <div class="team-bio">Electrical engineering technologist with 10 years on the bass guitar, driven by rhythm and faith.</div>
+                    <div class="role">Bass Guitar</div>
+                    <p>Bass player with 10 years of experience.</p>
                 </div>
             </div>
         </div>
 
-        <h2 style="text-align: center; color: var(--gold); letter-spacing: 4px; margin: 100px 0 40px 0; font-size: 2.5rem;">WATCH US LIVE</h2>
-        <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/3NwuYSd4lBs" title="ELEV8 Live" allowfullscreen></iframe>
+        <h2 class="section-title" style="margin-top: 120px;">Live Performance</h2>
+        <div class="video-box">
+            <div class="responsive-video">
+                <iframe src="https://www.youtube.com/embed/3NwuYSd4lBs" allowfullscreen></iframe>
+            </div>
         </div>
 
-        <div id="booking-section">
-            <h2 style="text-align: center; color: var(--gold); letter-spacing: 3px; font-size: 2.5rem; margin-bottom: 40px;">SECURE THE DATE</h2>
-            <div class="booking-wrap">
-                <div id="success-msg">
-                    <h3>Booking Request Sent!</h3>
-                    <p>Thank you for reaching out. We will get back to you shortly.</p>
-                    <button onclick="resetForm()" class="btn btn-book">Send Another</button>
-                </div>
-
-                <form id="booking-form" action="https://formspree.io/f/xdawolke" method="POST" onsubmit="handleFormSubmit(event)">
-                    <div class="form-row">
-                        <div><label>Email</label><input type="email" name="Email" required></div>
-                        <div><label>Phone</label><input type="tel" name="Phone" maxlength="20" required></div>
-                    </div>
-                    <div class="form-row">
-                        <div><label>Event Date</label><input type="date" name="Date" required></div>
-                        <div><label>Duration</label><input type="text" name="Duration" placeholder="e.g. 2 hours" required></div>
-                    </div>
-                    <div class="form-row">
-                        <div><label>Budget (CAD)</label><input type="text" name="Budget" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 44" required></div>
-                        <div><label>Include Singers?</label>
-                            <select name="Singers">
-                                <option value="Yes">Yes</option>
-                                <option value="No">No</option>
-                            </select>
-                        </div>
-                    </div>
-                    <label>Venue Address</label><input type="text" name="Venue" required>
-                    <label>Additional Notes</label><textarea name="Notes"></textarea>
-                    <button type="submit" id="submit-btn" class="btn btn-book" style="width: 100%; margin: 0; border-radius: 12px; height: 60px;">SEND BOOKING REQUEST</button>
-                </form>
+        <div id="booking" class="booking-container">
+            <h2 class="section-title" style="font-size: 2.2rem; margin-bottom: 40px;">Request a Booking</h2>
+            
+            <div id="form-message">
+                <h3>Booking Request Sent!</h3>
+                <p>We will review your details and get back to you shortly.</p>
+                <button onclick="window.location.reload()" class="btn btn-booking" style="margin-top: 20px;">New Request</button>
             </div>
+
+            <form id="elev8-booking-form" action="https://formspree.io/f/xdawolke" method="POST">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Event Date</label>
+                        <input type="date" name="event_date" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Performance Duration</label>
+                        <input type="text" name="duration" placeholder="e.g. 2 x 45 min sets" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Include Singers?</label>
+                        <select name="singers_included">
+                            <option value="No">Instrumental Only</option>
+                            <option value="Yes">Yes, include singers</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Budget (CAD)</label>
+                        <input type="text" name="budget" required>
+                    </div>
+                    <div class="form-group full">
+                        <label>Venue Name & Address</label>
+                        <input type="text" name="location" required>
+                    </div>
+                    <div class="form-group full">
+                        <label>Additional Event Details</label>
+                        <textarea name="message" rows="5"></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn">SEND OFFICIAL REQUEST</button>
+            </form>
         </div>
     </div>
 
     <footer>&copy; 2026 ELEV8 MUSIC | REGINA, SK | ALL RIGHTS RESERVED</footer>
 
     <script>
-        async function handleFormSubmit(event) {
-            event.preventDefault();
-            const form = event.target;
-            const btn = document.getElementById('submit-btn');
-            btn.disabled = true;
-            btn.innerText = "SENDING...";
+        // Hero Carousel Logic
+        const slides = document.querySelectorAll('.hero-carousel img');
+        let currentSlide = 0;
 
-            try {
-                const response = await fetch(form.action, {
-                    method: form.method,
-                    body: new FormData(form),
-                    headers: { 'Accept': 'application/json' }
-                });
-                if (response.ok) {
-                    form.reset();
-                    document.getElementById('success-msg').style.display = 'flex';
-                    form.style.display = 'none';
-                }
-            } catch (error) {
-                alert("Error sending request.");
-                btn.disabled = false;
-                btn.innerText = "SEND BOOKING REQUEST";
+        function rotateHero() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        setInterval(rotateHero, 7000);
+
+        // AJAX Form Handling to prevent redirect
+        const form = document.getElementById('elev8-booking-form');
+        const msg = document.getElementById('form-message');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = new FormData(form);
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: data,
+                headers: { 'Accept': 'application/json' }
+            });
+            if (response.ok) {
+                form.style.display = 'none';
+                msg.style.display = 'block';
+                msg.scrollIntoView({ behavior: 'smooth' });
             }
-        }
-
-        function resetForm() {
-            document.getElementById('booking-form').style.display = 'block';
-            document.getElementById('success-msg').style.display = 'none';
-        }
-
-        const images = document.querySelectorAll('#hero-carousel img');
-        let current = 0;
-        setInterval(() => {
-            images[current].classList.remove('active');
-            current = (current + 1) % images.length;
-            images[current].classList.add('active');
-        }, 8000);
+        });
     </script>
 </body>
 </html>
