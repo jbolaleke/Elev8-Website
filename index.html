@@ -59,7 +59,7 @@
         .btn {
             padding: 15px 35px; text-decoration: none; color: white; border-radius: 50px;
             font-weight: bold; margin: 10px; transition: 0.4s; display: inline-block;
-            text-transform: uppercase; letter-spacing: 1px;
+            text-transform: uppercase; letter-spacing: 1px; border: none;
         }
         .btn-insta { background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); }
         .btn-yt { background-color: #FF0000; }
@@ -121,7 +121,11 @@
             max-width: 900px; 
             margin: auto;
             position: relative;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
         }
+        form { width: 100%; }
         label { display: block; margin-bottom: 8px; color: var(--gold); font-size: 0.9rem; font-weight: bold; }
         input, select, textarea {
             width: 100%; padding: 14px; background: #1a1a1a; border: 1px solid #333; color: white; border-radius: 10px; margin-bottom: 20px; box-sizing: border-box;
@@ -130,22 +134,23 @@
         textarea { height: 100px; resize: vertical; }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
 
-        /* SUCCESS MESSAGE OVERLAY */
+        /* IMPROVED SUCCESS MESSAGE */
         #success-msg {
             display: none;
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(10, 10, 10, 0.98);
-            border-radius: 25px;
-            z-index: 100;
+            width: 100%;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 20px;
+            animation: fadeIn 0.5s ease;
         }
-        #success-msg h3 { color: var(--gold); font-size: 2rem; margin-bottom: 10px; }
-        #success-msg p { margin-bottom: 20px; color: #ccc; }
+        #success-msg h3 { color: var(--gold); font-size: 2.5rem; margin: 0 0 15px 0; letter-spacing: 2px; }
+        #success-msg p { font-size: 1.1rem; color: #ccc; margin-bottom: 30px; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
         footer { text-align: center; padding: 80px 20px; color: #555; font-size: 0.85rem; letter-spacing: 2px; }
     </style>
@@ -216,9 +221,9 @@
             <div class="booking-wrap">
                 
                 <div id="success-msg">
-                    <h3>Booking Request Sent!</h3>
-                    <p>Thank you for reaching out. We will get back to you shortly.</p>
-                    <button onclick="resetForm()" class="btn btn-book">Send Another</button>
+                    <h3>Request Sent!</h3>
+                    <p>Thank you for reaching out to ELEV8. We'll be in touch shortly to discuss your event.</p>
+                    <button onclick="resetForm()" class="btn btn-book">Send Another Request</button>
                 </div>
 
                 <form id="booking-form" action="https://formspree.io/f/xdawolke" method="POST" onsubmit="handleFormSubmit(event)">
@@ -226,7 +231,7 @@
                         <div><label>Contact Email</label><input type="email" name="Email" required></div>
                         <div>
                             <label>Phone Number</label>
-                            <input type="tel" name="Phone" onkeypress="return isPhoneKey(event)" maxlength="15" inputmode="tel" required>
+                            <input type="tel" name="Phone" onkeypress="return isPhoneKey(event)" maxlength="20" inputmode="tel" required>
                         </div>
                     </div>
                     <div class="form-row">
@@ -265,7 +270,6 @@
     <footer>&copy; 2026 ELEV8 MUSIC | REGINA, SK | ALL RIGHTS RESERVED</footer>
 
     <script>
-        // Restricts input for Phone: Digits, +, and -
         function isPhoneKey(evt) {
             var charCode = (evt.which) ? evt.which : evt.keyCode;
             if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode !== 43 && charCode !== 45) {
@@ -274,7 +278,6 @@
             return true;
         }
 
-        // Restricts input for Budget: Digits and Commas (charCode 44)
         function isBudgetKey(evt) {
             var charCode = (evt.which) ? evt.which : evt.keyCode;
             if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode !== 44) {
@@ -283,7 +286,6 @@
             return true;
         }
 
-        // handleFormSubmit clears the form and shows success without leaving the page
         async function handleFormSubmit(event) {
             event.preventDefault();
             const form = event.target;
@@ -300,9 +302,13 @@
                 });
 
                 if (response.ok) {
-                    form.reset(); // Clears all information typed
+                    form.reset();
                     document.getElementById('success-msg').style.display = 'flex';
-                    form.style.visibility = 'hidden';
+                    form.style.display = 'none';
+                    window.scrollTo({
+                        top: document.getElementById('booking-section').offsetTop - 50,
+                        behavior: 'smooth'
+                    });
                 } else {
                     alert("Submission failed. Please try again.");
                     btn.disabled = false;
@@ -317,13 +323,12 @@
 
         function resetForm() {
             const form = document.getElementById('booking-form');
-            form.style.visibility = 'visible';
+            form.style.display = 'block';
             document.getElementById('success-msg').style.display = 'none';
             document.getElementById('submit-btn').disabled = false;
             document.getElementById('submit-btn').innerText = "SEND BOOKING REQUEST";
         }
 
-        // Hero Background Carousel Logic
         const heroImages = document.querySelectorAll('#hero-carousel img');
         let currentHero = 0;
         function nextHero() {
