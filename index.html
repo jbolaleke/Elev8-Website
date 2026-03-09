@@ -156,6 +156,7 @@
     </header>
 
     <div class="container">
+        
         <h2 style="text-align: center; color: var(--gold); letter-spacing: 4px; margin-bottom: 50px; font-size: 2.5rem;">MEET THE TEAM</h2>
         <div class="team-grid">
             <div class="team-card">
@@ -179,7 +180,7 @@
                 <div class="team-overlay">
                     <h3>Ukeme Enoch</h3>
                     <p class="role">Drums</p>
-                    <div class="team-bio">Ukeme Enoch is a professional drummer, teacher, and mentor active since 2019, endorsed by Soul-tone Cymbals.</div>
+                    <div class="team-bio">Ukeme Enoch is a professional drummer and mentor active since 2019, endorsed by Soul-tone Cymbals. Well-versed in Gospel, Afro, and Funk.</div>
                 </div>
             </div>
             <div class="team-card">
@@ -187,7 +188,7 @@
                 <div class="team-overlay">
                     <h3>John Olaleke</h3>
                     <p class="role">Bass</p>
-                    <div class="team-bio">John is an electrical engineering technologist and bassist with ten years of experience.</div>
+                    <div class="team-bio">Guided by his faith, John balances his career as an electrical engineering technologist with 10 years on the bass guitar.</div>
                 </div>
             </div>
         </div>
@@ -200,7 +201,7 @@
                         <div><label>Contact Email</label><input type="email" name="Email" required></div>
                         <div>
                             <label>Phone Number (Digits only)</label>
-                            <input type="tel" name="Phone" pattern="[0-9]+" inputmode="numeric" required title="Please enter digits only">
+                            <input type="tel" name="Phone" onkeypress="return isNumberKey(event)" inputmode="numeric" required>
                         </div>
                     </div>
                     <div class="form-row">
@@ -216,7 +217,7 @@
                     <div class="form-row">
                         <div>
                             <label>Budget (CAD - Digits only)</label>
-                            <input type="text" name="Budget" pattern="[0-9]+" inputmode="numeric" required title="Please enter digits only">
+                            <input type="text" name="Budget" onkeypress="return isNumberKey(event)" inputmode="numeric" required>
                         </div>
                         <div>
                             <label>Singers?</label>
@@ -226,7 +227,7 @@
                             </select>
                         </div>
                     </div>
-                    
+
                     <label>Custom Notes (Optional)</label>
                     <textarea name="Notes" placeholder="Tell us more about your event..."></textarea>
                     
@@ -239,6 +240,16 @@
     <footer>&copy; 2026 ELEV8 MUSIC | REGINA, SK | ALL RIGHTS RESERVED</footer>
 
     <script>
+        // Restricts input to numeric digits only
+        function isNumberKey(evt) {
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                return false;
+            }
+            return true;
+        }
+
+        // Hero Background Carousel Logic
         const heroImages = document.querySelectorAll('#hero-carousel img');
         let currentHero = 0;
         function nextHero() {
