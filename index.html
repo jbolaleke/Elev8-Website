@@ -74,14 +74,14 @@
             color: #fff;
         }
 
-        /* Buttons - Rounded Style */
+        /* Rounded Buttons */
         .btn-group { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
         
         .btn {
             padding: 18px 45px;
             text-decoration: none;
             color: #fff;
-            border-radius: 50px; /* Fully rounded corners */
+            border-radius: 50px;
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -195,7 +195,12 @@
 
         input:focus { border-color: var(--primary-gold); outline: none; }
 
-        /* Form Submit Button - Rounded */
+        /* Dark Mode Calendar/Time Icons Visibility */
+        input::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            cursor: pointer;
+        }
+
         .submit-btn {
             width: 100%; 
             padding: 20px; 
@@ -207,7 +212,7 @@
             cursor: pointer; 
             text-transform: uppercase; 
             letter-spacing: 2px;
-            border-radius: 50px; /* Fully rounded */
+            border-radius: 50px;
             transition: all 0.3s ease;
         }
 
@@ -278,7 +283,7 @@
                 <div class="team-overlay">
                     <h3>John Olaleke</h3>
                     <div class="role">Bass</div>
-                    <div class="team-bio">Bass player with 10 years of experience. John balances his passion for rhythm with his career as an electrical engineering technologist.</div>
+                    <div class="team-bio">Bass player with 10 years of experience. John balances his passion for rhythm with his professional career.</div>
                 </div>
             </div>
         </div>
@@ -307,7 +312,7 @@
                     </div>
                     <div class="form-group">
                         <label>Phone Number</label>
-                        <input type="tel" name="phone" required>
+                        <input type="tel" name="phone" maxlength="20" required>
                     </div>
                     <div class="form-group">
                         <label>Event Date</label>
@@ -326,7 +331,7 @@
                     </div>
                     <div class="form-group">
                         <label>Budget (CAD)</label>
-                        <input type="text" name="budget" required>
+                        <input type="text" name="budget" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 44" required>
                     </div>
                     <div class="form-group full">
                         <label>Venue Address</label>
