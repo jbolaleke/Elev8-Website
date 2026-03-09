@@ -21,7 +21,7 @@
             scroll-behavior: smooth;
         }
 
-        /* HERO CAROUSEL */
+        /* HERO CAROUSEL - RESTORED VISIBILITY */
         header {
             height: 90vh;
             position: relative;
@@ -38,21 +38,26 @@
         .carousel-bg {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
+            z-index: 0; /* Ensures it sits behind text but stays visible */
         }
 
         .carousel-bg img {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: contain; 
+            object-fit: cover; /* Changed to cover for a full-screen cinematic look */
             opacity: 0;
             transition: opacity 2s ease-in-out;
         }
 
-        .carousel-bg img.active { opacity: 0.5; }
+        .carousel-bg img.active { opacity: 0.6; } /* Increased opacity for visibility */
 
-        h1 { font-size: clamp(3.5rem, 12vw, 6rem); margin: 0; letter-spacing: 15px; color: var(--gold); text-shadow: 0 0 25px rgba(0,0,0,0.9); }
-        .tagline { font-size: 1.3rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 40px; color: #ddd; }
+        .hero-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 { font-size: clamp(3.5rem, 12vw, 6rem); margin: 0; letter-spacing: 15px; color: var(--gold); text-shadow: 0 0 30px rgba(0,0,0,1); }
+        .tagline { font-size: 1.3rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 40px; color: #fff; text-shadow: 2px 2px 4px #000; }
 
         .btn {
             padding: 15px 35px; text-decoration: none; color: white; border-radius: 50px;
@@ -66,7 +71,7 @@
 
         .container { max-width: 1200px; margin: auto; padding: 80px 20px; }
 
-        /* TEAM SECTION - RESTORED CLICKABLE CARDS */
+        /* TEAM SECTION */
         .team-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -104,13 +109,13 @@
         }
 
         .team-card:hover img { transform: scale(1.1); filter: brightness(0.4); }
-        .team-card:hover .team-overlay { background: rgba(0,0,0,0.8); justify-content: center; text-align: center; }
+        .team-card:hover .team-overlay { background: rgba(0,0,0,0.85); justify-content: center; text-align: center; }
         .team-card:hover .team-bio { max-height: 300px; opacity: 1; margin-top: 15px; }
 
         .team-card h3 { color: var(--gold); margin: 0; font-size: 1.8rem; letter-spacing: 1px; }
         .team-card .role { color: var(--deep-orange); font-weight: bold; font-size: 0.9rem; text-transform: uppercase; margin: 5px 0; }
 
-        /* FORM - RESTORED ALL FIELDS */
+        /* BOOKING FORM */
         .booking-wrap {
             background: var(--glass); 
             padding: 50px; 
@@ -120,13 +125,12 @@
             margin: auto;
         }
         label { display: block; margin-bottom: 8px; color: var(--gold); font-size: 0.9rem; font-weight: bold; }
-        input, select, textarea {
+        input, select {
             width: 100%; padding: 14px; background: #1a1a1a; border: 1px solid #333; color: white; border-radius: 10px; margin-bottom: 20px; box-sizing: border-box;
-            font-size: 1rem;
         }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
 
-        footer { text-align: center; padding: 80px 20px; color: #555; font-size: 0.85rem; letter-spacing: 2px; border-top: 1px solid #1a1a1a; }
+        footer { text-align: center; padding: 80px 20px; color: #555; font-size: 0.85rem; letter-spacing: 2px; }
     </style>
 </head>
 <body>
@@ -141,12 +145,14 @@
             <img src="gallery/band-live-6.jpg">
             <img src="gallery/band-live-7.jpg">
         </div>
-        <h1>ELEV8</h1>
-        <p class="tagline">Electrifying Afrobeats & Global Sounds</p>
-        <div>
-            <a href="https://www.instagram.com/elev8_msc?igsh=MWQ3aXAwb3cydG10OQ==" class="btn btn-insta" target="_blank">Instagram</a>
-            <a href="https://youtube.com/@elev8_msc?si=rKBV1Hr15Xliv-Wb" class="btn btn-yt" target="_blank">YouTube</a>
-            <a href="#booking-section" class="btn btn-book">Book Now</a>
+        <div class="hero-content">
+            <h1>ELEV8</h1>
+            <p class="tagline">Electrifying Afrobeats & Global Sounds</p>
+            <div>
+                <a href="https://www.instagram.com/elev8_msc?igsh=MWQ3aXAwb3cydG10OQ==" class="btn btn-insta" target="_blank">Instagram</a>
+                <a href="https://youtube.com/@elev8_msc?si=rKBV1Hr15Xliv-Wb" class="btn btn-yt" target="_blank">YouTube</a>
+                <a href="#booking-section" class="btn btn-book">Book Now</a>
+            </div>
         </div>
     </header>
 
@@ -167,7 +173,7 @@
                 <div class="team-overlay">
                     <h3>Joshua Olufemi</h3>
                     <p class="role">Main Keys</p>
-                    <div class="team-bio">Master of the keys, Joshua provides the harmonic foundation that elevates every performance to a professional standard.</div>
+                    <div class="team-bio">Master of the keys, Joshua provides the harmonic foundation that elevates every performance.</div>
                 </div>
             </div>
             <div class="team-card">
@@ -175,7 +181,7 @@
                 <div class="team-overlay">
                     <h3>Ukeme Enoch</h3>
                     <p class="role">Drums</p>
-                    <div class="team-bio">Nurtured by gospel roots, Ukeme is a versatile drummer endorsed by Soul-tone Cymbals. He has been teaching and mentoring since 2019 and was nominated for best R&B Artist in 2023 with Lyssa and The Try-tones.</div>
+                    <div class="team-bio">Nurtured by gospel roots, Ukeme is a versatile drummer endorsed by Soul-tone Cymbals. Well-versed in Gospel, Afro, and Funk, he has been mentoring since 2019.</div>
                 </div>
             </div>
             <div class="team-card">
@@ -183,7 +189,7 @@
                 <div class="team-overlay">
                     <h3>John Olaleke</h3>
                     <p class="role">Bass</p>
-                    <div class="team-bio">Guided by his faith, John balances a career as an electrical engineering technologist with a decade of experience on the bass guitar. He uses his technical skill to honor his musical gifts.</div>
+                    <div class="team-bio">Guided by his faith, John balances a career as an electrical engineering technologist with a decade of experience on the bass guitar.</div>
                 </div>
             </div>
         </div>
@@ -202,33 +208,21 @@
                     </div>
                     <div class="form-row">
                         <div><label>Start Time</label><input type="time" name="Time" required></div>
-                        <div><label>Performance Duration</label><input type="text" name="Duration" placeholder="e.g. 2 hours" required></div>
+                        <div><label>Duration</label><input type="text" name="Duration" placeholder="e.g. 2 hours" required></div>
                     </div>
                     <label>Venue Address</label>
                     <input type="text" name="Venue" required>
-                    
                     <div class="form-row">
                         <div><label>Budget (CAD)</label><input type="text" name="Budget" required></div>
                         <div>
-                            <label>Include Singers?</label>
+                            <label>Singers?</label>
                             <select name="Singers">
                                 <option value="Yes">Yes</option>
                                 <option value="No">No</option>
                             </select>
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div>
-                            <label>Sound System</label>
-                            <select name="PA_System">
-                                <option value="Band Provides">Band Provides</option>
-                                <option value="Client Provides">Client Provides</option>
-                            </select>
-                        </div>
-                        <div><label>Other Bands Playing?</label><input type="text" name="Others" placeholder="None"></div>
-                    </div>
-                    
-                    <button type="submit" style="width: 100%; background: var(--deep-orange); color: white; border: none; padding: 20px; font-weight: bold; border-radius: 12px; cursor: pointer; font-size: 1.2rem; margin-top: 20px; transition: 0.3s;">SEND BOOKING REQUEST</button>
+                    <button type="submit" style="width: 100%; background: var(--deep-orange); color: white; border: none; padding: 20px; font-weight: bold; border-radius: 12px; cursor: pointer; font-size: 1.2rem; margin-top: 20px;">SEND BOOKING REQUEST</button>
                 </form>
             </div>
         </div>
@@ -237,10 +231,10 @@
     <footer>&copy; 2026 ELEV8 MUSIC | REGINA, SK | ALL RIGHTS RESERVED</footer>
 
     <script>
-        // Hero Background Carousel - 10 Second Interval
         const heroImages = document.querySelectorAll('#hero-carousel img');
         let currentHero = 0;
         function nextHero() {
+            if(heroImages.length === 0) return;
             heroImages[currentHero].classList.remove('active');
             currentHero = (currentHero + 1) % heroImages.length;
             heroImages[currentHero].classList.add('active');
