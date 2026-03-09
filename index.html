@@ -120,6 +120,7 @@
             border: 1px solid rgba(255,140,0,0.3); 
             max-width: 900px; 
             margin: auto;
+            position: relative;
         }
         label { display: block; margin-bottom: 8px; color: var(--gold); font-size: 0.9rem; font-weight: bold; }
         input, select, textarea {
@@ -128,6 +129,23 @@
         }
         textarea { height: 100px; resize: vertical; }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+
+        /* SUCCESS MESSAGE OVERLAY */
+        #success-msg {
+            display: none;
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(10, 10, 10, 0.98);
+            border-radius: 25px;
+            z-index: 100;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+        #success-msg h3 { color: var(--gold); font-size: 2rem; margin-bottom: 10px; }
+        #success-msg p { margin-bottom: 20px; color: #ccc; }
 
         footer { text-align: center; padding: 80px 20px; color: #555; font-size: 0.85rem; letter-spacing: 2px; }
     </style>
@@ -196,7 +214,14 @@
         <div id="booking-section" style="padding-top: 120px;">
             <h2 style="text-align: center; color: var(--gold); letter-spacing: 3px; font-size: 2.5rem; margin-bottom: 40px;">SECURE THE DATE</h2>
             <div class="booking-wrap">
-                <form action="https://formspree.io/f/xdawolke" method="POST">
+                
+                <div id="success-msg">
+                    <h3>Booking Request Sent!</h3>
+                    <p>Thank you for reaching out. We will get back to you shortly.</p>
+                    <button onclick="resetForm()" class="btn btn-book">Send Another</button>
+                </div>
+
+                <form id="booking-form" action="https://formspree.io/f/xdawolke" method="POST" onsubmit="handleFormSubmit(event)">
                     <div class="form-row">
                         <div><label>Contact Email</label><input type="email" name="Email" required></div>
                         <div>
@@ -216,8 +241,8 @@
                     <input type="text" name="Venue" required>
                     <div class="form-row">
                         <div>
-                            <label>Budget (CAD - Digits only)</label>
-                            <input type="text" name="Budget" onkeypress="return isBudgetKey(event)" maxlength="15" inputmode="numeric" required>
+                            <label>Budget (CAD)</label>
+                            <input type="text" name="Budget" onkeypress="return isBudgetKey(event)" maxlength="15" inputmode="text" required>
                         </div>
                         <div>
                             <label>Singers?</label>
@@ -231,7 +256,7 @@
                     <label>Custom Notes (Optional)</label>
                     <textarea name="Notes" placeholder="Tell us more about your event..."></textarea>
                     
-                    <button type="submit" style="width: 100%; background: var(--deep-orange); color: white; border: none; padding: 20px; font-weight: bold; border-radius: 12px; cursor: pointer; font-size: 1.2rem; margin-top: 20px;">SEND BOOKING REQUEST</button>
+                    <button type="submit" id="submit-btn" style="width: 100%; background: var(--deep-orange); color: white; border: none; padding: 20px; font-weight: bold; border-radius: 12px; cursor: pointer; font-size: 1.2rem; margin-top: 20px;">SEND BOOKING REQUEST</button>
                 </form>
             </div>
         </div>
@@ -240,23 +265,62 @@
     <footer>&copy; 2026 ELEV8 MUSIC | REGINA, SK | ALL RIGHTS RESERVED</footer>
 
     <script>
-        // Validation for Phone: Allows Digits, +, and - up to 15 chars
+        // Restricts input for Phone: Digits, +, and -
         function isPhoneKey(evt) {
             var charCode = (evt.which) ? evt.which : evt.keyCode;
-            // Allow numbers (48-57), plus (43), and hyphen (45)
             if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode !== 43 && charCode !== 45) {
                 return false;
             }
             return true;
         }
 
-        // Validation for Budget: Digits only up to 15 chars
+        // Restricts input for Budget: Digits and Commas (charCode 44)
         function isBudgetKey(evt) {
             var charCode = (evt.which) ? evt.which : evt.keyCode;
-            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode !== 44) {
                 return false;
             }
             return true;
+        }
+
+        // handleFormSubmit clears the form and shows success without leaving the page
+        async function handleFormSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const btn = document.getElementById('submit-btn');
+            btn.disabled = true;
+            btn.innerText = "SENDING...";
+
+            const data = new FormData(form);
+            try {
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    body: data,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    form.reset(); // Clears all information typed
+                    document.getElementById('success-msg').style.display = 'flex';
+                    form.style.visibility = 'hidden';
+                } else {
+                    alert("Submission failed. Please try again.");
+                    btn.disabled = false;
+                    btn.innerText = "SEND BOOKING REQUEST";
+                }
+            } catch (error) {
+                alert("Network error. Please check your connection.");
+                btn.disabled = false;
+                btn.innerText = "SEND BOOKING REQUEST";
+            }
+        }
+
+        function resetForm() {
+            const form = document.getElementById('booking-form');
+            form.style.visibility = 'visible';
+            document.getElementById('success-msg').style.display = 'none';
+            document.getElementById('submit-btn').disabled = false;
+            document.getElementById('submit-btn').innerText = "SEND BOOKING REQUEST";
         }
 
         // Hero Background Carousel Logic
