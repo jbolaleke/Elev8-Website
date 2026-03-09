@@ -6,22 +6,26 @@
     <title>ELEV8 Music | Premier Afrobeats Cover Band</title>
     <style>
         :root {
-            --gold: #FFD700;
-            --deep-orange: #FF8C00;
-            --dark-bg: #0a0a0a;
-            --glass: rgba(255, 255, 255, 0.05);
+            /* Club-Inspired Palette */
+            --madrid-white: #FFFFFF;      /* David - Headings & Text */
+            --chelsea-blue: #034694;      /* Joshua - Primary Theme */
+            --liverpool-red: #C8102E;     /* Ukeme - Critical Actions */
+            --mancity-sky: #6CABDD;       /* John - Highlights/Hover */
+            --gold-accent: #DBA111;       /* Logo Match */
+            --dark-bg: #050505;
+            --glass: rgba(255, 255, 255, 0.03);
         }
 
         body {
             font-family: 'Segoe UI', Roboto, sans-serif;
             background-color: var(--dark-bg);
-            color: white;
+            color: var(--madrid-white);
             margin: 0;
             line-height: 1.6;
             scroll-behavior: smooth;
         }
 
-        /* HERO CAROUSEL */
+        /* HERO SECTION */
         header {
             height: 90vh;
             position: relative;
@@ -31,8 +35,15 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            border-bottom: 4px solid var(--deep-orange);
+            border-bottom: 4px solid var(--chelsea-blue);
             background: black;
+        }
+
+        .logo-img {
+            max-width: 300px;
+            height: auto;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 15px rgba(255,255,255,0.2));
         }
 
         .carousel-bg {
@@ -49,12 +60,18 @@
             transition: opacity 2s ease-in-out;
         }
 
-        .carousel-bg img.active { opacity: 0.6; }
+        .carousel-bg img.active { opacity: 0.5; }
 
         .hero-content { position: relative; z-index: 10; }
 
-        h1 { font-size: clamp(3.5rem, 12vw, 6rem); margin: 0; letter-spacing: 15px; color: var(--gold); text-shadow: 0 0 30px rgba(0,0,0,1); }
-        .tagline { font-size: 1.3rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 40px; color: #fff; text-shadow: 2px 2px 4px #000; }
+        .tagline { 
+            font-size: 1.3rem; 
+            letter-spacing: 4px; 
+            text-transform: uppercase; 
+            margin-bottom: 40px; 
+            color: var(--mancity-sky); 
+            text-shadow: 2px 2px 4px #000; 
+        }
 
         .btn {
             padding: 15px 35px; text-decoration: none; color: white; border-radius: 50px;
@@ -63,8 +80,8 @@
         }
         .btn-insta { background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); }
         .btn-yt { background-color: #FF0000; }
-        .btn-book { background-color: var(--deep-orange); cursor: pointer; }
-        .btn:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(255,140,0,0.3); }
+        .btn-book { background-color: var(--liverpool-red); cursor: pointer; }
+        .btn:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(200,16,46,0.4); }
 
         .container { max-width: 1200px; margin: auto; padding: 80px 20px; }
 
@@ -81,7 +98,7 @@
             height: 500px;
             border-radius: 20px;
             overflow: hidden;
-            border: 1px solid rgba(255,215,0,0.1);
+            border: 1px solid rgba(108,171,221,0.2);
             background: #111;
         }
 
@@ -106,11 +123,11 @@
         }
 
         .team-card:hover img { transform: scale(1.1); filter: brightness(0.4); }
-        .team-card:hover .team-overlay { background: rgba(0,0,0,0.85); justify-content: center; text-align: center; }
+        .team-card:hover .team-overlay { background: rgba(3,70,148,0.85); justify-content: center; text-align: center; }
         .team-card:hover .team-bio { max-height: 300px; opacity: 1; margin-top: 15px; }
 
-        .team-card h3 { color: var(--gold); margin: 0; font-size: 1.8rem; letter-spacing: 1px; }
-        .team-card .role { color: var(--deep-orange); font-weight: bold; font-size: 0.9rem; text-transform: uppercase; margin: 5px 0; }
+        .team-card h3 { color: var(--madrid-white); margin: 0; font-size: 1.8rem; letter-spacing: 1px; }
+        .team-card .role { color: var(--mancity-sky); font-weight: bold; font-size: 0.9rem; text-transform: uppercase; margin: 5px 0; }
 
         /* VIDEO SECTION */
         .video-container {
@@ -118,9 +135,9 @@
             border-radius: 25px;
             overflow: hidden;
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,215,0,0.2);
+            border: 1px solid var(--chelsea-blue);
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            padding-bottom: 56.25%;
             height: 0;
         }
         .video-container iframe {
@@ -134,22 +151,20 @@
             background: var(--glass); 
             padding: 50px; 
             border-radius: 25px; 
-            border: 1px solid rgba(255,140,0,0.3); 
+            border: 1px solid var(--mancity-sky); 
             max-width: 900px; 
             margin: auto;
-            position: relative;
             min-height: 400px;
             display: flex;
             align-items: center;
         }
         form { width: 100%; }
-        label { display: block; margin-bottom: 8px; color: var(--gold); font-size: 0.9rem; font-weight: bold; }
+        label { display: block; margin-bottom: 8px; color: var(--mancity-sky); font-size: 0.9rem; font-weight: bold; }
         input, select, textarea {
             width: 100%; padding: 14px; background: #1a1a1a; border: 1px solid #333; color: white; border-radius: 10px; margin-bottom: 20px; box-sizing: border-box;
             font-family: inherit;
         }
-        textarea { height: 100px; resize: vertical; }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+        input:focus { border-color: var(--chelsea-blue); outline: none; }
 
         #success-msg {
             display: none;
@@ -160,15 +175,14 @@
             text-align: center;
             animation: fadeIn 0.5s ease;
         }
-        #success-msg h3 { color: var(--gold); font-size: 2.5rem; margin: 0 0 15px 0; letter-spacing: 2px; }
-        #success-msg p { font-size: 1.1rem; color: #ccc; margin-bottom: 30px; }
+        #success-msg h3 { color: var(--gold-accent); font-size: 2.5rem; margin: 0 0 15px 0; }
         
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        footer { text-align: center; padding: 80px 20px; color: #555; font-size: 0.85rem; letter-spacing: 2px; }
+        footer { text-align: center; padding: 80px 20px; color: #555; font-size: 0.85rem; letter-spacing: 2px; border-top: 1px solid #111; }
     </style>
 </head>
 <body>
@@ -184,7 +198,7 @@
             <img src="gallery/band-live-7.jpg">
         </div>
         <div class="hero-content">
-            <h1>ELEV8</h1>
+            <img src="Elev8_Official_Logo_page-0001.jpg" alt="ELEV8 Logo" class="logo-img">
             <p class="tagline">Electrifying Afrobeats & Global Sounds</p>
             <div>
                 <a href="https://www.instagram.com/elev8_msc?igsh=MWQ3aXAwb3cydG10OQ==" class="btn btn-insta" target="_blank">Instagram</a>
@@ -195,10 +209,9 @@
     </header>
 
     <div class="container">
-        
-        <h2 style="text-align: center; color: var(--gold); letter-spacing: 4px; margin-bottom: 50px; font-size: 2.5rem;">MEET THE TEAM</h2>
+        <h2 style="text-align: center; color: var(--madrid-white); letter-spacing: 4px; margin-bottom: 50px; font-size: 2.5rem;">MEET THE TEAM</h2>
         <div class="team-grid">
-            <div class="team-card">
+            <div class="team-card" style="border-color: var(--madrid-white);">
                 <img src="gallery/David.jpg" alt="David Shonibare">
                 <div class="team-overlay">
                     <h3>David Shonibare</h3>
@@ -206,7 +219,7 @@
                     <div class="team-bio">Co-founder and melodic heart of ELEV8. David's unique style blends soulful melodies with high-energy Afrobeats rhythms.</div>
                 </div>
             </div>
-            <div class="team-card">
+            <div class="team-card" style="border-color: var(--chelsea-blue);">
                 <img src="gallery/Joshua.jpg" alt="Joshua Olufemi">
                 <div class="team-overlay">
                     <h3>Joshua Olufemi</h3>
@@ -214,15 +227,15 @@
                     <div class="team-bio">Master of the keys, Joshua provides the harmonic foundation that elevates every performance.</div>
                 </div>
             </div>
-            <div class="team-card">
+            <div class="team-card" style="border-color: var(--liverpool-red);">
                 <img src="gallery/Ukeme.jpg" alt="Ukeme Enoch">
                 <div class="team-overlay">
                     <h3>Ukeme Enoch</h3>
                     <p class="role">Drums</p>
-                    <div class="team-bio">Ukeme Enoch is a professional drummer and mentor active since 2019, endorsed by Soul-tone Cymbals. Well-versed in Gospel, Afro, and Funk.</div>
+                    <div class="team-bio">Ukeme Enoch is a professional drummer and mentor endorsed by Soul-tone Cymbals. Well-versed in Gospel, Afro, and Funk.</div>
                 </div>
             </div>
-            <div class="team-card">
+            <div class="team-card" style="border-color: var(--mancity-sky);">
                 <img src="gallery/John.jpg" alt="John Olaleke">
                 <div class="team-overlay">
                     <h3>John Olaleke</h3>
@@ -232,63 +245,35 @@
             </div>
         </div>
 
-        <h2 style="text-align: center; color: var(--gold); letter-spacing: 4px; margin: 100px 0 40px 0; font-size: 2.5rem;">WATCH US LIVE</h2>
+        <h2 style="text-align: center; color: var(--madrid-white); letter-spacing: 4px; margin: 100px 0 40px 0; font-size: 2.5rem;">WATCH US LIVE</h2>
         <div class="video-container">
-            <iframe 
-                src="https://www.youtube.com/embed/3NwuYSd4lBs" 
-                title="D'Banj – Endowed (Live Cover by Elev8)" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                referrerpolicy="strict-origin-when-cross-origin" 
-                allowfullscreen>
-            </iframe>
+            <iframe src="https://www.youtube.com/embed/3NwuYSd4lBs" title="ELEV8 Music Live" allowfullscreen></iframe>
         </div>
 
         <div id="booking-section" style="padding-top: 50px;">
-            <h2 style="text-align: center; color: var(--gold); letter-spacing: 3px; font-size: 2.5rem; margin-bottom: 40px;">SECURE THE DATE</h2>
+            <h2 style="text-align: center; color: var(--madrid-white); letter-spacing: 3px; font-size: 2.5rem; margin-bottom: 40px;">SECURE THE DATE</h2>
             <div class="booking-wrap">
-                
                 <div id="success-msg">
-                    <h3>Request Sent!</h3>
-                    <p>Thank you for reaching out to ELEV8. We'll be in touch shortly to discuss your event.</p>
-                    <button onclick="resetForm()" class="btn btn-book">Send Another Request</button>
+                    <h3>Booking Request Sent!</h3>
+                    <p>Thank you for reaching out. We will get back to you shortly.</p>
+                    <button onclick="resetForm()" class="btn btn-book">SEND ANOTHER</button>
                 </div>
 
                 <form id="booking-form" action="https://formspree.io/f/xdawolke" method="POST" onsubmit="handleFormSubmit(event)">
-                    <div class="form-row">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                         <div><label>Contact Email</label><input type="email" name="Email" required></div>
-                        <div>
-                            <label>Phone Number</label>
-                            <input type="tel" name="Phone" onkeypress="return isPhoneKey(event)" maxlength="20" inputmode="tel" required>
-                        </div>
+                        <div><label>Phone Number</label><input type="tel" name="Phone" maxlength="20" required></div>
                     </div>
-                    <div class="form-row">
-                        <div><label>Event Name</label><input type="text" name="Event" required></div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                         <div><label>Event Date</label><input type="date" name="Date" required></div>
-                    </div>
-                    <div class="form-row">
-                        <div><label>Start Time</label><input type="time" name="Time" required></div>
-                        <div><label>Duration</label><input type="text" name="Duration" placeholder="e.g. 2 hours" required></div>
-                    </div>
-                    <label>Venue Address</label>
-                    <input type="text" name="Venue" required>
-                    <div class="form-row">
                         <div>
                             <label>Budget (CAD)</label>
-                            <input type="text" name="Budget" onkeypress="return isBudgetKey(event)" maxlength="15" inputmode="text" required>
-                        </div>
-                        <div>
-                            <label>Singers?</label>
-                            <select name="Singers">
-                                <option value="Yes">Yes</option>
-                                <option value="No">No</option>
-                            </select>
+                            <input type="text" name="Budget" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 44" required>
                         </div>
                     </div>
-
-                    <label>Custom Notes (Optional)</label>
-                    <textarea name="Notes" placeholder="Tell us more about your event..."></textarea>
-                    
-                    <button type="submit" id="submit-btn" style="width: 100%; background: var(--deep-orange); color: white; border: none; padding: 20px; font-weight: bold; border-radius: 12px; cursor: pointer; font-size: 1.2rem; margin-top: 20px;">SEND BOOKING REQUEST</button>
+                    <label>Venue Address</label><input type="text" name="Venue" required>
+                    <label>Notes</label><textarea name="Notes"></textarea>
+                    <button type="submit" id="submit-btn" class="btn btn-book" style="width: 100%; margin: 0; border-radius: 12px; height: 60px;">SEND BOOKING REQUEST</button>
                 </form>
             </div>
         </div>
@@ -297,22 +282,6 @@
     <footer>&copy; 2026 ELEV8 MUSIC | REGINA, SK | ALL RIGHTS RESERVED</footer>
 
     <script>
-        function isPhoneKey(evt) {
-            var charCode = (evt.which) ? evt.which : evt.keyCode;
-            if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode !== 43 && charCode !== 45) {
-                return false;
-            }
-            return true;
-        }
-
-        function isBudgetKey(evt) {
-            var charCode = (evt.which) ? evt.which : evt.keyCode;
-            if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode !== 44) {
-                return false;
-            }
-            return true;
-        }
-
         async function handleFormSubmit(event) {
             event.preventDefault();
             const form = event.target;
@@ -320,11 +289,10 @@
             btn.disabled = true;
             btn.innerText = "SENDING...";
 
-            const data = new FormData(form);
             try {
                 const response = await fetch(form.action, {
                     method: form.method,
-                    body: data,
+                    body: new FormData(form),
                     headers: { 'Accept': 'application/json' }
                 });
 
@@ -332,25 +300,16 @@
                     form.reset();
                     document.getElementById('success-msg').style.display = 'flex';
                     form.style.display = 'none';
-                    window.scrollTo({
-                        top: document.getElementById('booking-section').offsetTop - 50,
-                        behavior: 'smooth'
-                    });
-                } else {
-                    alert("Submission failed. Please try again.");
-                    btn.disabled = false;
-                    btn.innerText = "SEND BOOKING REQUEST";
                 }
             } catch (error) {
-                alert("Network error. Please check your connection.");
+                alert("Error sending request. Please try again.");
                 btn.disabled = false;
                 btn.innerText = "SEND BOOKING REQUEST";
             }
         }
 
         function resetForm() {
-            const form = document.getElementById('booking-form');
-            form.style.display = 'block';
+            document.getElementById('booking-form').style.display = 'block';
             document.getElementById('success-msg').style.display = 'none';
             document.getElementById('submit-btn').disabled = false;
             document.getElementById('submit-btn').innerText = "SEND BOOKING REQUEST";
@@ -359,7 +318,6 @@
         const heroImages = document.querySelectorAll('#hero-carousel img');
         let currentHero = 0;
         function nextHero() {
-            if(heroImages.length === 0) return;
             heroImages[currentHero].classList.remove('active');
             currentHero = (currentHero + 1) % heroImages.length;
             heroImages[currentHero].classList.add('active');
